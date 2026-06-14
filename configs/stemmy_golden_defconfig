@@ -17,7 +17,7 @@ CONFIG_SYS_LOAD_ADDR=0x100000
 # CONFIG_EFI_LOADER is not set
 CONFIG_OF_BOARD_SETUP=y
 CONFIG_USE_BOOTCOMMAND=y
-CONFIG_BOOTCOMMAND="ext4load mmc 1:1 0x00008000 /boot/zImage && ext4load mmc 1:1 0x05000000 /boot/ste-ux500-samsung-golden.dtb && setenv bootargs console=ttyAMA2,115200n8 root=/dev/mmcblk1p1 rootwait rw && bootz 0x00008000 - 0x05000000; echo *** SD boot failed - dropping to fastboot ***; run fastbootcmd"
+CONFIG_BOOTCOMMAND="part number mmc 0 DATAFS pn && ext4load mmc 0:${pn} 0x00008000 /boot/zImage && ext4load mmc 0:${pn} 0x05000000 /boot/ste-ux500-samsung-golden.dtb && setenv bootargs console=ttyAMA2,115200n8 root=/dev/mmcblk0p${pn} rootwait rw && bootz 0x00008000 - 0x05000000; echo *** eMMC boot failed - dropping to fastboot ***; run fastbootcmd"
 CONFIG_SYS_CBSIZE=256
 CONFIG_SYS_PBSIZE=276
 CONFIG_SYS_CONSOLE_INFO_QUIET=y
